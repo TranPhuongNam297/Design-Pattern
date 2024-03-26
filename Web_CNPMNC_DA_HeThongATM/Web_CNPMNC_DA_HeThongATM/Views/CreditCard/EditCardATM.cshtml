@@ -1,0 +1,94 @@
+﻿﻿@using Web_CNPMNC_DA_HeThongATM.Models.ViewModel
+
+@model TheNganHangViewModel
+
+@{
+    Layout = "_LayoutMain";
+   
+}
+<body>
+    <div class="container">
+        <form method="post" asp-controller="CreditCard" asp-action="EditCardATM" style="padding-top:0px ; background-color:#ffff">
+            <div class="inputBox">
+                <h4>
+                  Chi tiết thẻ
+                </h4>
+
+            </div>
+            <div class="flexbox">
+
+                <div class="inputBox">
+                    <span>
+                        Mã Khách Hàng
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input  readonly value="@ViewBag.Details.MaKHKey" type="text" maxlength="16" id="makhachhang" asp-for="MaKHKey">
+                </div>
+                <div class="inputBox">
+                    <span>
+                        Tên Khách Hàng
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input  readonly value="@ViewBag.TenKhachHang" type="text" maxlength="16" class="tenkhachhang">
+                </div>
+            </div>
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>
+                        Ngày Mở Thẻ
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input type="password" class="password-input" readonly value="@ViewBag.Details.NgayMoThe" type="text" maxlength="16" class="sdt" asp-for="NgayMoThe">
+                </div>
+                <div class="inputBox">
+                    <span>
+                        Ngày Hết Hạn
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input type="password" class="password-input" value="@ViewBag.Details.NgayHetHan" type="text" maxlength="16" asp-for="NgayHetHan">
+                </div>
+            </div>
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>
+                        Mã Pin
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input type="password" class="password-input" value="@ViewBag.Details.MaPin" type="text" maxlength="16" class="card-number-input" asp-for="MaPin">
+                </div>
+                <div class="inputBox">
+                    <span>
+                        Mã Số Thẻ
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <input type="password" class="password-input" value="@ViewBag.Details.MaSoThe" type="text" class="card-holder-input" asp-for="MaSoThe">
+
+                </div>
+            </div>     
+            <div class="flexbox">
+                <a asp-controller="CreditCard" asp-action="ListCard" class="btn btn-danger submit-btn">
+                    <i class="fa fa-long-arrow-left"></i> BACK
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>     
+    <script>
+        $(document).ready(function () {
+            $(".toggleButton").click(function () {
+                var input = $(this).prev();
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
+
+   
+</body>
+
+

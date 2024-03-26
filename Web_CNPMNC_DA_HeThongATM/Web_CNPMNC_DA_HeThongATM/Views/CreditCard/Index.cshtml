@@ -1,0 +1,138 @@
+﻿﻿@using Web_CNPMNC_DA_HeThongATM.Models.ViewModel
+
+@model TheNganHangViewModel
+
+@{
+    Layout = "_LayoutMain";
+}
+<body>
+    @if (TempData["Message"] != null)
+    {
+        <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+            <span class="badge badge-pill badge-primary">Thành Công</span>
+            @TempData["Message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    }
+    else if (TempData["Fail"] != null)
+    {
+        <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+            <span class="badge badge-pill badge-danger">Thất Bại</span>
+            @TempData["Fail"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    }
+
+    <div class="container">
+
+        <div class="card-container">
+
+            <div class="front">
+                <div class="image">
+                    <img src="/images/chip.png" alt="">
+                    <img src="/images/visa.png" alt="">
+                </div>
+                <div class="card-number-box">################</div>
+
+                <div class="flexbox">
+                    <div class="box">
+                        <div class="card-name-customer">
+                        </div>
+                        <div class="card-holder-name">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <span>expires</span>
+                        <div class="expiration">
+                            <span class="exp-month">mm</span>
+                            <span class="exp-year">yy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back">
+                <div class="stripe"></div>
+                <div class="box">
+                    <span>cvv</span>
+                    <div class="cvv-box"></div>
+                    <img src="image/visa.png" alt="">
+                </div>
+            </div>
+
+        </div>
+
+        <form method="post" asp-controller="CreditCard" asp-action="CreateCard">
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>Căn cước công dân</span>
+                    <input type="text" maxlength="16" id="makhachhang" asp-for="CCCD">
+                    <span asp-validation-for="CCCD" class="text-danger"></span>
+                </div>
+                <div class="inputBox">
+                    <span>Tên Khách Hàng</span>
+                    <input type="text" maxlength="16" asp-for="TenKhachHang" class="tenkhachhang">
+                    <span asp-validation-for="TenKhachHang" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>Ngày Mở Thẻ</span>
+                    <input type="text" maxlength="16" id="ngaymothe" asp-for="NgayMoThe">
+                    <span asp-validation-for="NgayMoThe" class="text-danger"></span>
+                </div>
+                <div class="inputBox">
+                    <span>Tháng hết hạn</span>
+                    <input type="text" id="thanghethan" class="month-input">
+                </div>
+                <div class="inputBox">
+                    <span>Năm hết hạn</span>
+                    <input type="text" id="namhethan" class="year-input">
+                    <input type="hidden" id="ngayhethan" asp-for="NgayHetHan" />
+                    <span class="text-danger" asp-validation-for="NgayHetHan"></span>
+                </div>
+              
+            </div>
+             <div class="flexbox">               
+                <div class="inputBox">
+                    <span>Số tài khoản</span>
+                    <input type="text" class="card-holder-input" asp-for="SoTaiKhoan">
+                    <span class="text-danger" asp-validation-for="SoTaiKhoan"></span>
+                </div>
+                <div class="inputBox">
+                    <span>Mã Pin</span>
+                    <input type="text" class="card-card-input" asp-for="MaPin">
+                    <span asp-validation-for="MaPin" class="text-danger"></span>
+                </div>
+                 <div class="inputBox">
+                    <span>Mã Số Thẻ</span>
+                    <input type="text" maxlength="16" class="card-number-input" asp-for="MaSoThe">
+                    <span class="text-danger" asp-validation-for="MaSoThe"></span>
+                </div>
+            </div>      
+          
+            <input type="submit" value="submit" class="submit-btn">
+        </form>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/form-card.js">
+
+    </script>
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+            <span class="badge badge-pill badge-primary">Success</span>
+            @ViewBag.SuccessMessage
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    }
+</body>
+
+
