@@ -30,6 +30,7 @@ import com.example.app_cnpmnc_da_hethongatm.Activities.TransferMoneyActivity;
 import com.example.app_cnpmnc_da_hethongatm.Adapter.ImageSlideAdapter;
 import com.example.app_cnpmnc_da_hethongatm.Model.ImageSlide;
 import com.example.app_cnpmnc_da_hethongatm.R;
+import com.example.app_cnpmnc_da_hethongatm.template.ViewGold;
 
 import java.util.ArrayList;
 
@@ -190,7 +191,7 @@ public class HomeFragment extends Fragment {
         cvOpenNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NewaccountActivity.class);
+                Intent intent = new Intent(getActivity(), ViewGold.class);
                 startActivity(intent);
             }
         });
