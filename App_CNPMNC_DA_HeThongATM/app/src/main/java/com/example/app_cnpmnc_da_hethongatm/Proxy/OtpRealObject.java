@@ -57,23 +57,23 @@ public class OtpRealObject implements ProxyInterface {
     }
     @Override
     public void UpdatePass(String pass1,Context context,String number,String pass2){
-        Map<String, Object> map = new HashMap<>();
-        map.put("MatKhau",pass1);
-        firebaseDatabase.getReference("KhachHang").child(number).updateChildren(map)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo(number)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(context, LoginActivity.class);
-                        context.startActivity(intent1);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()){
+                            ds.getRef().child("MatKhau").setValue(pass1);
+                            Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                            Intent intent1 = new Intent(context, LoginActivity.class);
+                            context.startActivity(intent1);
+                        }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context,"Mật khẩu xác nhận phải giống nhau",Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(context,"Thất bại"+error,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
 }
