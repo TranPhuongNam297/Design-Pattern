@@ -119,9 +119,10 @@
             tools:replace="android:screenOrientation" />
         <activity android:name=".Activities.SaveBillActivity" />
         <activity android:name=".Activities.ListSaveBillActivity" />
-        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Activities.GetOTPActivity" />
-        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Activities.VerifyOTPActivity" />
+        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Proxy.GetOTPActivity" />
+        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Proxy.VerifyOTPActivity" />
         <activity android:name="com.example.app_cnpmnc_da_hethongatm.Activities.formUserRegister" />
+        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Proxy.ResetPasswordActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
