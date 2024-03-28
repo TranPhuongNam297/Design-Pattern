@@ -6,10 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app_cnpmnc_da_hethongatm.Extend.ResultCode;
-import com.example.app_cnpmnc_da_hethongatm.Observer.Invoker;
-import com.example.app_cnpmnc_da_hethongatm.Observer.ScanCommand;
-import com.example.app_cnpmnc_da_hethongatm.Observer.TransferDataCommand;
+import com.example.app_cnpmnc_da_hethongatm.Command.Invoker;
+import com.example.app_cnpmnc_da_hethongatm.Command.ScanCommand;
+import com.example.app_cnpmnc_da_hethongatm.Command.TransferDataCommand;
 import com.example.app_cnpmnc_da_hethongatm.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

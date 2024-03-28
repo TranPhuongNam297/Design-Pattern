@@ -1,4 +1,4 @@
-package com.example.app_cnpmnc_da_hethongatm.Observer;
+package com.example.app_cnpmnc_da_hethongatm.Command;
 
 import android.app.Activity;
 import android.util.Log;

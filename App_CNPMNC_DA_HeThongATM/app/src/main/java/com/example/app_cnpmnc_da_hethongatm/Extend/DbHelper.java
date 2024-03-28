@@ -114,7 +114,7 @@ public class DbHelper {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
+                        if (!dataSnapshot.exists()) {
                             Map<String, Object> map = new HashMap<>();
                             map.put("TKThuHuong", (long) thuHuong.getTKThuHuong());
                             map.put("TenNguoiThuHuong", thuHuong.getTenNguoiThuHuong());

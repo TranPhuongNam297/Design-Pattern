@@ -1,4 +1,4 @@
-package com.example.app_cnpmnc_da_hethongatm.Observer;
+package com.example.app_cnpmnc_da_hethongatm.Command;
 
 public class Invoker {
     private Command command;
