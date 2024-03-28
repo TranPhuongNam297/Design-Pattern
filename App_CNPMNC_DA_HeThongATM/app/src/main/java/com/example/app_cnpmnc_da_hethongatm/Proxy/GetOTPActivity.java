@@ -33,8 +33,6 @@ public class GetOTPActivity extends AppCompatActivity {
     Button btn_getotp;
     ProgressBar wait_otp;
     ProxyInterface otpsend = new OtpProxy();
-//    boolean flag = true;
-//    FirebaseAuth mauth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,40 +55,6 @@ public class GetOTPActivity extends AppCompatActivity {
                         wait_otp.setVisibility(View.VISIBLE);
                         btn_getotp.setVisibility(View.INVISIBLE);
                         otpsend.getOTP(GetOTPActivity.this,input_phone.getText().toString().trim());
-//                        flag = CheckInputnumber();
-//                        if(flag){
-//                            Log.d("phonenumber", "onClick: "+"+84"+input_phone.getText());
-////                            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mauth)
-////                                    .setPhoneNumber("+84"+input_phone.getText())
-////                                    .setTimeout(60L, TimeUnit.SECONDS)
-////                                    .setActivity(GetOTPActivity.this)
-////                                    .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-////                                        @Override
-////                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-////                                            wait_otp.setVisibility(View.GONE);
-////                                            btn_getotp.setVisibility(View.VISIBLE);
-////                                            Log.d("onVerificationCompleted", "onVerificationCompleted: ");
-////                                        }
-////
-////                                        @Override
-////                                        public void onVerificationFailed(@NonNull FirebaseException e) {
-////                                            wait_otp.setVisibility(View.GONE);
-////                                            btn_getotp.setVisibility(View.VISIBLE);
-////                                            Toast.makeText(GetOTPActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-////                                        }
-////                                        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-////                                            super.onCodeSent(s, forceResendingToken);
-////                                            wait_otp.setVisibility(View.GONE);
-////                                            btn_getotp.setVisibility(View.VISIBLE);
-////                                            Intent intent = new Intent(getApplicationContext(),VerifyOTPActivity.class);
-////                                            intent.putExtra("mobile",input_phone.getText().toString());
-////                                            intent.putExtra("OTP",s);
-////                                            Log.d("onCodeSent", "onCodeSent: "+s);
-////                                            startActivity(intent);
-////                                        }
-////                                    }).build();
-////                            PhoneAuthProvider.verifyPhoneNumber(options);
-//                        }
                     }
                     else {
                         Toast.makeText(GetOTPActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();

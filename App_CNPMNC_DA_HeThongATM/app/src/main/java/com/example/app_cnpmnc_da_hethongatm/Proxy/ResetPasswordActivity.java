@@ -17,7 +17,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     TextInputEditText pass,cm_pass;
     Button btn_submit;
     Intent intent;
-    OtpProxy OTPSubmit = new OtpProxy();
+    ProxyInterface OTPSubmit = new OtpProxy();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

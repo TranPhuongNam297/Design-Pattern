@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -16,21 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout;
 
-import com.example.app_cnpmnc_da_hethongatm.Activities.ApoimentActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.AppointmentActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.AddNewAccountActivity;
 import com.example.app_cnpmnc_da_hethongatm.Activities.CreateSavingAccountActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.DepositMoreSavingActivity;
 import com.example.app_cnpmnc_da_hethongatm.Activities.ManageAccountAndCardActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.NewaccountActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.PhoneActivity;
 import com.example.app_cnpmnc_da_hethongatm.Activities.TransferMoneyActivity;
 import com.example.app_cnpmnc_da_hethongatm.Adapter.ImageSlideAdapter;
 import com.example.app_cnpmnc_da_hethongatm.Model.ImageSlide;
 import com.example.app_cnpmnc_da_hethongatm.R;
-import com.example.app_cnpmnc_da_hethongatm.template.ViewGold;
+import com.example.app_cnpmnc_da_hethongatm.template.ViewGoldActivity;
 
 import java.util.ArrayList;
 
@@ -191,7 +182,7 @@ public class HomeFragment extends Fragment {
         cvOpenNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ViewGold.class);
+                Intent intent = new Intent(getActivity(), ViewGoldActivity.class);
                 startActivity(intent);
             }
         });

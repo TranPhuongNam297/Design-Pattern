@@ -14,7 +14,6 @@ public abstract  class WebViewTemplate {
         webSettings.setJavaScriptEnabled(true);
         String iframeUrl = generateIframeUrl();
         webView.loadData("<iframe frameborder=\"0\" width=\"100%\" height=\"750px\" src=\"" + iframeUrl + "\"></iframe>", "text/html", "utf-8");
-
         return webView;
     }
 }

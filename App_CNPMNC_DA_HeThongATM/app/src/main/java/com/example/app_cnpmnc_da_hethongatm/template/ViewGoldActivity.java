@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_cnpmnc_da_hethongatm.R;
 
-public class ViewGold extends AppCompatActivity {
+public class ViewGoldActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
