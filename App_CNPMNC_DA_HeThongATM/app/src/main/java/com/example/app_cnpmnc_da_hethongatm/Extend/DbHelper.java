@@ -161,7 +161,7 @@ public class DbHelper {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
+                        if (!dataSnapshot.exists()) {
                             // Kiểm tra xem TenNguoiThuHuong đã tồn tại chưa
                             firebaseDatabase.getReference("ThuHuong").orderByChild("TenNguoiThuHuong").equalTo(thuHuong.getTenNguoiThuHuong())
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
