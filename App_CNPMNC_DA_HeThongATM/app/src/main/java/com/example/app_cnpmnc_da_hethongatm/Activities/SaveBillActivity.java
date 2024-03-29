@@ -36,25 +36,17 @@ public class SaveBillActivity extends AppCompatActivity {
         SetText();
         config = new Config(this);
 
-        btn_backhome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(SaveBillActivity.this, MainActivity.class);
-                startActivity(intent1);
-            }
-        });
-        cv_luumau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(i ==0){
-                    MauChuyenTien mauChuyenTien = new MauChuyenTien(taiKhoanNguoiNhan.getTenTK(),taiKhoanNguoiNhan.getSoTaiKhoan(),Double.parseDouble(TienGD),NoiDung,config.getCustomerKey());
-                    DbHelper.SaveBill(mauChuyenTien);
-                    DbHelper.BuilderXinXo(SaveBillActivity.this,"Lưu thành công");
-                    i++;
-                }
+        btn_backhome.setOnClickListener(v -> startActivity(new Intent(SaveBillActivity.this, MainActivity.class)));
+
+        cv_luumau.setOnClickListener(v -> {
+            if (i == 0) {
+                SaveBillFacade.getInstance().saveBill(taiKhoanNguoiNhan, taiKhoanNguoiGui, NgayGui, GioGui, NoiDung, MaGd, Double.parseDouble(TienGD));
+                SaveBillFacade.getInstance().showBillSavedMessage(this);
+                i++;
             }
         });
     }
+
     private void InitUI(){
         rs_tien=findViewById(R.id.rs_tien);
         rs_nguoinhan=findViewById(R.id.rs_nguoinhan);
@@ -76,12 +68,9 @@ public class SaveBillActivity extends AppCompatActivity {
         NoiDung = intent.getStringExtra("NoiDung");
         MaGd = intent.getStringExtra("MaGd");
         TienGD =intent.getStringExtra("TienGD");
-
     }
     private void SetText(){
-        double number = Double.parseDouble(TienGD);
-        long tiengd = (long) number;
-        rs_tien.setText(String.valueOf(tiengd));
+        rs_tien.setText(TienGD);
         rs_nguoigui.setText(taiKhoanNguoiGui.getTenTK());
         rs_nguoinhan.setText(taiKhoanNguoiNhan.getTenTK());
         rs_stkgui.setText(String.valueOf(taiKhoanNguoiGui.getSoTaiKhoan()));

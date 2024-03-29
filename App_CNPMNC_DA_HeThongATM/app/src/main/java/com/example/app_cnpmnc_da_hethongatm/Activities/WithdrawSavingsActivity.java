@@ -2,7 +2,6 @@ package com.example.app_cnpmnc_da_hethongatm.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,9 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.example.app_cnpmnc_da_hethongatm.Extend.UtilityClass;
 import com.example.app_cnpmnc_da_hethongatm.Model.GuiTietKiem;
 import com.example.app_cnpmnc_da_hethongatm.Model.TaiKhoanLienKet;
 import com.example.app_cnpmnc_da_hethongatm.Model.ThuHuong;
@@ -24,12 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class WithdrawSavingsActivity extends AppCompatActivity {
-
+    private WithdrawSavingsAdapter withdrawSavingsAdapter;
     TextView textViewNgayGui, textViewTaiKhoanNguon, textViewTaiKhoanTietKiem, textViewTienGui, textViewTienLaiToiKy;
 
     Button btn_quaylaisavings, btn_xacnhanrut;
-
-    Toolbar tbToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,17 +32,8 @@ public class WithdrawSavingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ruttien);
         initID();
         initData();
+        withdrawSavingsAdapter = new WithdrawSavingsAdapterImpl();
         clickprocess();
-        UtilityClass.setupToolbar(this, tbToolbar, "Rút tiền tiết kiệm");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();  // Kết thúc Activity hiện tại và quay lại Activity trước đó
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void initID(){
@@ -58,16 +44,13 @@ public class WithdrawSavingsActivity extends AppCompatActivity {
         textViewTienLaiToiKy = findViewById(R.id.textViewTienLaiToiKy);
         btn_quaylaisavings = findViewById(R.id.btn_quaylaisavings);
         btn_xacnhanrut = findViewById(R.id.btn_xacnhanrut);
-        tbToolbar = findViewById(R.id.tbToolbar);
     }
 
     public void initData() {
-
         Intent getIntent = getIntent();
 
         // Lấy key từ Intent
         String id = getIntent.getStringExtra("Key");
-
         DatabaseReference guiTietKiemRef = FirebaseDatabase.getInstance().getReference().child("GuiTietKiem");
         guiTietKiemRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,7 +93,7 @@ public class WithdrawSavingsActivity extends AppCompatActivity {
         });
     }
 
-    public void clickprocess(){
+    public void clickprocess() {
         btn_quaylaisavings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +106,7 @@ public class WithdrawSavingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent getIntent = getIntent();
                 String id = getIntent.getStringExtra("Key");
+                withdrawSavingsAdapter.withdrawSavings(id);
                 DatabaseReference guiTietKiemRef = FirebaseDatabase.getInstance().getReference().child("GuiTietKiem");
                 DatabaseReference taiKhoanLienKetRef = FirebaseDatabase.getInstance().getReference().child("TaiKhoanLienKet");
 
@@ -134,8 +118,7 @@ public class WithdrawSavingsActivity extends AppCompatActivity {
                             String currentKey = dataSnapshot.getKey();
                             if (currentKey.equals(id)){
                                 Double tiengui = dataSnapshot.child("TienGui").getValue(double.class);
-                                Long taikhoannguon = dataSnapshot.child("TaiKhoanNguon").getValue(Long.class);
-                                taiKhoanLienKetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                Long taikhoannguon = dataSnapshot.child("TaiKhoanNguon").getValue(Long.class);taiKhoanLienKetRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
