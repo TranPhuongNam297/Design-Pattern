@@ -17,16 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.app_cnpmnc_da_hethongatm.Activities.formUserRegister;
 import com.example.app_cnpmnc_da_hethongatm.Extend.DbHelper;
 import com.example.app_cnpmnc_da_hethongatm.R;
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/GetOTPActivity.java
-import com.google.firebase.FirebaseException;
-========
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/GetOTPRegisterActivity.java
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class GetOTPRegisterActivity extends AppCompatActivity {
+public class GetOTPActivity extends AppCompatActivity {
     EditText input_phone;
     Button btn_getotp;
     ProgressBar wait_otp;
@@ -55,18 +52,13 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
                         otpsend.getOTP(GetOTPActivity.this,input_phone.getText().toString().trim());
                     }
                     else {
-                        Toast.makeText(GetOTPRegisterActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GetOTPActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
                         return;
                     }
-                }
-                else {
-                    Toast.makeText(GetOTPRegisterActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
-                    return;
                 }
             }
         });
     }
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/GetOTPActivity.java
 //    private boolean CheckInputnumber(){
 //        DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo("0"+input_phone.getText().toString().trim())
 //                .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,28 +79,4 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
 //                });
 //        return flag;
 //    }
-========
-    private boolean CheckInputnumber(){
-        flag = false;
-        DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo("0"+input_phone.getText().toString().trim())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            Toast.makeText(GetOTPRegisterActivity.this,"SDT bị trùng",Toast.LENGTH_SHORT).show();
-                            flag = false;
-                        }
-                        else {
-                            flag = true;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-        return flag;
-    }
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/GetOTPRegisterActivity.java
-
 }

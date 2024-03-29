@@ -1,4 +1,4 @@
-package com.example.app_cnpmnc_da_hethongatm.Proxy;
+package com.example.app_cnpmnc_da_hethongatm.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app_cnpmnc_da_hethongatm.Activities.LoginActivity;
-import com.example.app_cnpmnc_da_hethongatm.Activities.formUserRegister;
 import com.example.app_cnpmnc_da_hethongatm.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,32 +88,21 @@ public class VerifyOTPRegisterActivity extends AppCompatActivity {
                                btn_submit.setVisibility(View.VISIBLE);
                                wait_submit.setVisibility(View.GONE);
                                if(task.isSuccessful()){
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
-                                   Intent intent1 = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                                   Toast.makeText(VerifyOTPActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
-========
                                    Intent intent1 = new Intent(getApplicationContext(),formUserRegister.class);
                                    Toast.makeText(VerifyOTPRegisterActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                                    intent1.putExtra("MatKhau",enterCode);
                                    intent1.putExtra("Sdt","0"+intent.getStringExtra("mobile"));
+                                   Log.d("Mat khau", "onComplete: "+OTP);
+                                   Log.d("Sdt", "onComplete: "+"0"+intent.getStringExtra("mobile"));
                                    startActivity(intent1);
                                }
                                else {
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
-                                   Toast.makeText(VerifyOTPActivity.this,"Sai OTP",Toast.LENGTH_SHORT).show();
-========
                                    Toast.makeText(VerifyOTPRegisterActivity.this,"Nhập đúng mã OTP",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                                }
                            }
                        });
                    }else {
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
-                       Toast.makeText(VerifyOTPActivity.this,"Kiểm tra interner"+intent.getStringExtra("mobile"),Toast.LENGTH_SHORT).show();
-========
                        Toast.makeText(VerifyOTPRegisterActivity.this,"Kiểm tra interner",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                    }
                 }
                 else {

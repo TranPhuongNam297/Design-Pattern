@@ -1,4 +1,4 @@
-package com.example.app_cnpmnc_da_hethongatm.Proxy;
+package com.example.app_cnpmnc_da_hethongatm.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app_cnpmnc_da_hethongatm.Activities.formUserRegister;
 import com.example.app_cnpmnc_da_hethongatm.Extend.DbHelper;
 import com.example.app_cnpmnc_da_hethongatm.R;
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/GetOTPActivity.java
-import com.google.firebase.FirebaseException;
-========
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/GetOTPRegisterActivity.java
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +25,8 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
     EditText input_phone;
     Button btn_getotp;
     ProgressBar wait_otp;
-    ProxyInterface otpsend = new OtpProxy();
+    boolean flag = true;
+    FirebaseAuth mauth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +43,27 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
         btn_getotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(!input_phone.getText().toString().trim().isEmpty()){
                     if(input_phone.getText().toString().trim().length() == 9){
+                        flag = false;
+                        CheckInputnumber();
+                        Log.d("check sdt trung", "onClick: "+flag);
                         wait_otp.setVisibility(View.VISIBLE);
                         btn_getotp.setVisibility(View.INVISIBLE);
-                        otpsend.getOTP(GetOTPActivity.this,input_phone.getText().toString().trim());
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(flag == true){
+                                    Intent intent = new Intent(getApplicationContext(),formUserRegister.class);
+                                    intent.putExtra("mobile","0"+input_phone.getText().toString());
+                                    startActivity(intent);
+                                }
+                                else {
+                                    wait_otp.setVisibility(View.INVISIBLE);
+                                    btn_getotp.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        },5000);
                     }
                     else {
                         Toast.makeText(GetOTPRegisterActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
@@ -66,28 +77,6 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
             }
         });
     }
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/GetOTPActivity.java
-//    private boolean CheckInputnumber(){
-//        DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo("0"+input_phone.getText().toString().trim())
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if(snapshot.exists()){
-//                            flag = true;
-//                        }
-//                        else {
-//                            Toast.makeText(GetOTPActivity.this,"SDT không tồn tại trên hệ thống",Toast.LENGTH_SHORT).show();
-//                            flag = false;
-//                        }
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//        return flag;
-//    }
-========
     private boolean CheckInputnumber(){
         flag = false;
         DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo("0"+input_phone.getText().toString().trim())
@@ -109,6 +98,5 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
                 });
         return flag;
     }
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/GetOTPRegisterActivity.java
 
 }

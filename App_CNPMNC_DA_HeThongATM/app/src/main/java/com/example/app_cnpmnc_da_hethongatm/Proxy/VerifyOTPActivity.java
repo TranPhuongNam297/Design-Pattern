@@ -30,7 +30,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class VerifyOTPRegisterActivity extends AppCompatActivity {
+public class VerifyOTPActivity extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4,otp5,otp6;
     TextView textmobileshownumber,text_resentOTP;
     Button btn_submit;
@@ -90,36 +90,22 @@ public class VerifyOTPRegisterActivity extends AppCompatActivity {
                                btn_submit.setVisibility(View.VISIBLE);
                                wait_submit.setVisibility(View.GONE);
                                if(task.isSuccessful()){
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
                                    Intent intent1 = new Intent(getApplicationContext(), ResetPasswordActivity.class);
                                    Toast.makeText(VerifyOTPActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
-========
-                                   Intent intent1 = new Intent(getApplicationContext(),formUserRegister.class);
-                                   Toast.makeText(VerifyOTPRegisterActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                                    intent1.putExtra("MatKhau",enterCode);
-                                   intent1.putExtra("Sdt","0"+intent.getStringExtra("mobile"));
                                    startActivity(intent1);
                                }
                                else {
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
                                    Toast.makeText(VerifyOTPActivity.this,"Sai OTP",Toast.LENGTH_SHORT).show();
-========
-                                   Toast.makeText(VerifyOTPRegisterActivity.this,"Nhập đúng mã OTP",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                                }
                            }
                        });
                    }else {
-<<<<<<<< HEAD:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Proxy/VerifyOTPActivity.java
                        Toast.makeText(VerifyOTPActivity.this,"Kiểm tra interner"+intent.getStringExtra("mobile"),Toast.LENGTH_SHORT).show();
-========
-                       Toast.makeText(VerifyOTPRegisterActivity.this,"Kiểm tra interner",Toast.LENGTH_SHORT).show();
->>>>>>>> Nam-Dev:App_CNPMNC_DA_HeThongATM/app/src/main/java/com/example/app_cnpmnc_da_hethongatm/Activities/VerifyOTPRegisterActivity.java
                    }
                 }
                 else {
-                    Toast.makeText(VerifyOTPRegisterActivity.this,"Vui lòng nhập đủ mã OTP",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyOTPActivity.this,"Vui lòng nhập đủ mã OTP",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -223,7 +209,7 @@ public class VerifyOTPRegisterActivity extends AppCompatActivity {
                 PhoneAuthOptions.newBuilder(mauth)
                         .setPhoneNumber("+84"+intent.getStringExtra("mobile"))
                         .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(VerifyOTPRegisterActivity.this)
+                        .setActivity(VerifyOTPActivity.this)
                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -232,11 +218,11 @@ public class VerifyOTPRegisterActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyOTPRegisterActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyOTPActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 OTP = s;
-                                Toast.makeText(VerifyOTPRegisterActivity.this,"Đã gửi lại OTP",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyOTPActivity.this,"Đã gửi lại OTP",Toast.LENGTH_SHORT).show();
                             }
                         });
             }
