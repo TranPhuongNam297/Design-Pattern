@@ -28,7 +28,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class VerifyOTPActivity extends AppCompatActivity {
+public class VerifyOTPRegisterActivity extends AppCompatActivity {
     EditText otp1,otp2,otp3,otp4,otp5,otp6;
     TextView textmobileshownumber,text_resentOTP;
     Button btn_submit;
@@ -89,7 +89,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                wait_submit.setVisibility(View.GONE);
                                if(task.isSuccessful()){
                                    Intent intent1 = new Intent(getApplicationContext(),formUserRegister.class);
-                                   Toast.makeText(VerifyOTPActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(VerifyOTPRegisterActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
                                    intent1.putExtra("MatKhau",enterCode);
                                    intent1.putExtra("Sdt","0"+intent.getStringExtra("mobile"));
                                    Log.d("Mat khau", "onComplete: "+OTP);
@@ -97,16 +97,16 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                    startActivity(intent1);
                                }
                                else {
-                                   Toast.makeText(VerifyOTPActivity.this,"Nhập đúng mã OTP",Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(VerifyOTPRegisterActivity.this,"Nhập đúng mã OTP",Toast.LENGTH_SHORT).show();
                                }
                            }
                        });
                    }else {
-                       Toast.makeText(VerifyOTPActivity.this,"Kiểm tra interner",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(VerifyOTPRegisterActivity.this,"Kiểm tra interner",Toast.LENGTH_SHORT).show();
                    }
                 }
                 else {
-                    Toast.makeText(VerifyOTPActivity.this,"Vui lòng nhập đủ mã OTP",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyOTPRegisterActivity.this,"Vui lòng nhập đủ mã OTP",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -210,7 +210,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 PhoneAuthOptions.newBuilder(mauth)
                         .setPhoneNumber("+84"+intent.getStringExtra("mobile"))
                         .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(VerifyOTPActivity.this)
+                        .setActivity(VerifyOTPRegisterActivity.this)
                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -219,11 +219,11 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyOTPActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyOTPRegisterActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 OTP = s;
-                                Toast.makeText(VerifyOTPActivity.this,"Đã gửi lại OTP",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyOTPRegisterActivity.this,"Đã gửi lại OTP",Toast.LENGTH_SHORT).show();
                             }
                         });
             }

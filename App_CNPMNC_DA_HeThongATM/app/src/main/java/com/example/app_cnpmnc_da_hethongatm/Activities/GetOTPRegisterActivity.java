@@ -16,19 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app_cnpmnc_da_hethongatm.Extend.DbHelper;
 import com.example.app_cnpmnc_da_hethongatm.R;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.concurrent.TimeUnit;
-
-public class GetOTPActivity extends AppCompatActivity {
+public class GetOTPRegisterActivity extends AppCompatActivity {
     EditText input_phone;
     Button btn_getotp;
     ProgressBar wait_otp;
@@ -73,12 +66,12 @@ public class GetOTPActivity extends AppCompatActivity {
                         },5000);
                     }
                     else {
-                        Toast.makeText(GetOTPActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GetOTPRegisterActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
                 else {
-                    Toast.makeText(GetOTPActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GetOTPRegisterActivity.this,"Vui lòng nhập đúng định dạng sdt",Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -91,7 +84,7 @@ public class GetOTPActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            Toast.makeText(GetOTPActivity.this,"SDT bị trùng",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GetOTPRegisterActivity.this,"SDT bị trùng",Toast.LENGTH_SHORT).show();
                             flag = false;
                         }
                         else {
