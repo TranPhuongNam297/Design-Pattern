@@ -25,6 +25,7 @@ import com.example.app_cnpmnc_da_hethongatm.Adapter.BeneficiaryAdapter;
 import com.example.app_cnpmnc_da_hethongatm.Extend.Config;
 import com.example.app_cnpmnc_da_hethongatm.Extend.DbHelper;
 import com.example.app_cnpmnc_da_hethongatm.Extend.UtilityClass;
+import com.example.app_cnpmnc_da_hethongatm.Factory.IntentFactory;
 import com.example.app_cnpmnc_da_hethongatm.Model.ThuHuong;
 import com.example.app_cnpmnc_da_hethongatm.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -90,16 +91,6 @@ public class BeneficiaryManagementActivity extends AppCompatActivity implements 
         });
     }
 
-    // xử lý sự kiện ấn nút quay lại
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();  // Kết thúc Activity hiện tại và quay lại  Activity trước đó
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -119,64 +110,17 @@ public class BeneficiaryManagementActivity extends AppCompatActivity implements 
     }
 
     // Hiển thị menu (thêm/sửa/xóa)
-    public void showPopupMenu(View view, ThuHuong thuHuong, DatabaseReference databaseReference){
+    public void showPopupMenu(View view, ThuHuong thuHuong, DatabaseReference databaseReference) {
         PopupMenu popupMenu = new PopupMenu(BeneficiaryManagementActivity.this, view);
         popupMenu.inflate(R.menu.popup_menu);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_chuyentien:
-                        Intent intent1 = new Intent(BeneficiaryManagementActivity.this, TransferMoneyActivity.class);
-                        Log.d("firebase", "dTK: " + thuHuong.getTKThuHuong());
-
-                        intent1.putExtra("flag", USER_NAME);
-                        intent1.putExtra("tkthuhuong", thuHuong);
-                        startActivity(intent1);
-                        break;
-                    case R.id.action_edit:
-                        Intent intent = new Intent(BeneficiaryManagementActivity.this, AddEditBeneficiaryActivity.class);
-                        intent.putExtra("flag", EDIT_BENEFICIARY_FLAG);
-                        intent.putExtra("thuHuongKey", databaseReference.getKey());
-                        intent.putExtra("editThuHuong", thuHuong);
-                        startActivity(intent);
-                        break;
-                    case R.id.action_delete:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(BeneficiaryManagementActivity.this);
-                        builder.setTitle("Xác nhận xóa");
-                        builder.setMessage("Bạn có chắc chắn muốn xóa người thụ hưởng này không?");
-                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                DbHelper.deleteBeneficiary(databaseReference.getKey(), new DbHelper.FirebaseListener() {
-                                    @Override
-                                    public void onSuccessListener() {
-                                        Toast.makeText(BeneficiaryManagementActivity.this,"Xóa người thụ hưởng thành công", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onFailureListener(Exception e) {
-                                        Toast.makeText(BeneficiaryManagementActivity.this,"Hệ thống lỗi. Thao tác thất bại!", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onSuccessListener(DataSnapshot snapshot) {
-
-                                    }
-                                });
-                            }
-                        });
-                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(BeneficiaryManagementActivity.this,"Đã hủy", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        break;
-                    default:
-                        return false;
+                Intent intent = IntentFactory.getIntent(BeneficiaryManagementActivity.this, item.getItemId(), thuHuong, databaseReference);
+                if (intent != null) {
+                    startActivity(intent);
+                    return true;
                 }
-
                 return true;
             }
         });

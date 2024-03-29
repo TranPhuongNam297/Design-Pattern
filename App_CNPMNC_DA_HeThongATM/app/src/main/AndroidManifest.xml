@@ -124,6 +124,7 @@
         <activity android:name="com.example.app_cnpmnc_da_hethongatm.Activities.formUserRegister" />
         <activity android:name="com.example.app_cnpmnc_da_hethongatm.Proxy.ResetPasswordActivity" />
         <activity android:name="com.example.app_cnpmnc_da_hethongatm.template.ViewGoldActivity" />
+        <activity android:name="com.example.app_cnpmnc_da_hethongatm.Activities.GetOTPRegisterActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

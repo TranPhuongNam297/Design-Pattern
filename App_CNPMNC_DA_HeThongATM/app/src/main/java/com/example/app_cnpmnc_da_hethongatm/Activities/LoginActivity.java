@@ -3,6 +3,7 @@ package com.example.app_cnpmnc_da_hethongatm.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.app_cnpmnc_da_hethongatm.Extend.Config;
 import com.example.app_cnpmnc_da_hethongatm.Extend.DbHelper;
 import com.example.app_cnpmnc_da_hethongatm.MainActivity;
 import com.example.app_cnpmnc_da_hethongatm.Model.KhachHang;
@@ -34,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ProgressBar progressBar;
-    Button  button_forgot_password;
+
+    DbHelper dbHelper; //Thêm biến dbHelper
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         btLogin = findViewById(R.id.btLogin);
         btRegister = findViewById(R.id.btRegister);
         progressBar = findViewById(R.id.progressBar);
-        button_forgot_password= findViewById(R.id.button_forgot_password);
     }
 
     // Khởi tạo dữ liệu
     private void initData() {
         sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        dbHelper = DbHelper.getInstance(); // Thay đổi : Khởi tạo helper (Singleton)
     }
 
     // Xử lý sự kiện
@@ -84,18 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-//        btRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, GetOTPActivity.class);
-////                Intent intent = new Intent(LoginActivity.this,formUserRegister.class);
-//                startActivity(intent);
-//            }
-//        });
-        button_forgot_password.setOnClickListener(new View.OnClickListener() {
+        btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, GetOTPActivity.class);
+//                Intent intent = new Intent(LoginActivity.this,formUserRegister.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +115,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkAccount(String phone, String password) {
-        Query customer = DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo(phone);
+        //Sử dụng Instance để lấy thể hiện duy nhát của Dbhelper
+        Query customer = dbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo(phone);
+
 
     customer.addValueEventListener(new ValueEventListener() {
         @Override

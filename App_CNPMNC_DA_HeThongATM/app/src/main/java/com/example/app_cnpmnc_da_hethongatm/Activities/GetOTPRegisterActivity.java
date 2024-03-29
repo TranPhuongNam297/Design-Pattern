@@ -98,5 +98,4 @@ public class GetOTPRegisterActivity extends AppCompatActivity {
                 });
         return flag;
     }
-
 }

@@ -46,8 +46,22 @@ import java.util.Random;
 import java.util.Set;
 
 public class DbHelper {
-    static ProgressBar progressBar;
-    public static FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    static ProgressBar progressBar; //Khai báo instance và Fbase như thuộc tính của lớp
+    private static  DbHelper instance = null;
+    public static FirebaseDatabase firebaseDatabase;
+    
+    //Thêm constructor riêng tư
+    private DbHelper(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+    }
+    
+    //Thêm phương thức Instance để lấy thể hiện duy nhất của DbHelper
+    public static synchronized  DbHelper getInstance(){
+        if (instance == null){
+            instance = new DbHelper();
+        }
+        return  instance;
+    }
 
     public interface FirebaseListener {
         void onSuccessListener();
@@ -114,7 +128,7 @@ public class DbHelper {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             Map<String, Object> map = new HashMap<>();
                             map.put("TKThuHuong", (long) thuHuong.getTKThuHuong());
                             map.put("TenNguoiThuHuong", thuHuong.getTenNguoiThuHuong());

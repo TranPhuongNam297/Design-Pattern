@@ -59,7 +59,7 @@ public class OtpProxy implements ProxyInterface {
     }
     @Override
     public void UpdatePass(String pass1,Context context,String number,String pass2){
-        if(pass1.equals(pass2)){
+        if(pass1.equals(pass2) &&!pass1.equals("")){
             realotp.UpdatePass(pass1,context,number,pass2);
         }
         else {
