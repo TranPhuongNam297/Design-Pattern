@@ -97,11 +97,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                    startActivity(intent1);
                                }
                                else {
-                                   Intent intent1 = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                                   Toast.makeText(VerifyOTPActivity.this,"xác thực thành công",Toast.LENGTH_SHORT).show();
-                                   intent1.putExtra("MatKhau",enterCode);
-                                   intent1.putExtra("Sdt","0"+intent.getStringExtra("mobile"));
-                                   startActivity(intent1);
+                                   Toast.makeText(VerifyOTPActivity.this,"Sai OTP",Toast.LENGTH_SHORT).show();
                                }
                            }
                        });

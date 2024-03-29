@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ProgressBar progressBar;
+    Button  button_forgot_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         btLogin = findViewById(R.id.btLogin);
         btRegister = findViewById(R.id.btRegister);
         progressBar = findViewById(R.id.progressBar);
+        button_forgot_password= findViewById(R.id.button_forgot_password);
     }
 
     // Khởi tạo dữ liệu
@@ -82,11 +84,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        btRegister.setOnClickListener(new View.OnClickListener() {
+//        btRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this, GetOTPActivity.class);
+////                Intent intent = new Intent(LoginActivity.this,formUserRegister.class);
+//                startActivity(intent);
+//            }
+//        });
+        button_forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, GetOTPActivity.class);
-//                Intent intent = new Intent(LoginActivity.this,formUserRegister.class);
                 startActivity(intent);
             }
         });
