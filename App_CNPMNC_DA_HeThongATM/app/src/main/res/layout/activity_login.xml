@@ -30,7 +30,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/poo_solid"
+                app:srcCompat="@drawable/logo_new2"
                 app:tint="@color/primary_blue_color" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="Xin chào, DAO CONG TUAN"
+                android:text="Xin chào!"
                 android:textColor="#696969"
                 android:textSize="16sp"
                 android:textStyle="bold" />

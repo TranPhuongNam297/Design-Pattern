@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     ProgressBar progressBar;
 
+    DbHelper dbHelper; //Thêm biến dbHelper
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initData() {
         sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        dbHelper = DbHelper.getInstance(); // Thay đổi : Khởi tạo helper (Singleton)
     }
 
     // Xử lý sự kiện
@@ -111,7 +114,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkAccount(String phone, String password) {
-        Query customer = DbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo(phone);
+        //Sử dụng Instance để lấy thể hiện duy nhát của Dbhelper
+        Query customer = dbHelper.firebaseDatabase.getReference("KhachHang").orderByChild("SoDienThoai").equalTo(phone);
+
 
     customer.addValueEventListener(new ValueEventListener() {
         @Override
