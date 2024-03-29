@@ -1,30 +1,30 @@
 package com.example.app_cnpmnc_da_hethongatm.Activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.app_cnpmnc_da_hethongatm.Extend.ResultCode;
-import com.example.app_cnpmnc_da_hethongatm.MainActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.app_cnpmnc_da_hethongatm.Command.Invoker;
+import com.example.app_cnpmnc_da_hethongatm.Command.ScanCommand;
+import com.example.app_cnpmnc_da_hethongatm.Command.TransferDataCommand;
 import com.example.app_cnpmnc_da_hethongatm.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class ScanQRActivity extends AppCompatActivity {
 
+    private Invoker invoker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qractivity);
 
-        IntentIntegrator intentIntegrator = new IntentIntegrator(ScanQRActivity.this);
-        intentIntegrator.setOrientationLocked(true);
-        intentIntegrator.setPrompt("Quét mã tại đây để giao dịch");
-        intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        intentIntegrator.initiateScan();
-        intentIntegrator.setBeepEnabled(false);
+        invoker = new Invoker(new ScanCommand(this));
+
+        invoker.execute();
     }
 
     @Override
@@ -37,18 +37,14 @@ public class ScanQRActivity extends AppCompatActivity {
                 String SoTaiKhoan = parts[0];
                 String amount = "";
                 String message = "";
+                if (parts.length > 1) {
+                    amount = parts[1];
+                }
                 if (parts.length > 2) {
-                    amount = parts[2];
+                    message = parts[2];
                 }
-                if (parts.length > 3) {
-                    message = parts[3];
-                }
-                Intent intent = new Intent(ScanQRActivity.this, TransferMoneyActivity.class);
-                intent.putExtra("SoTaiKhoan", SoTaiKhoan);
-                intent.putExtra("amount", amount);
-                intent.putExtra("message", message);
-                intent.putExtra("flag", ResultCode.SCAN_QR);
-                startActivity(intent);
+                invoker = new Invoker(new TransferDataCommand(this, SoTaiKhoan, amount, message));
+                invoker.execute();
             }else {
                 super.onActivityResult(requestCode, resultCode, data);
             }
